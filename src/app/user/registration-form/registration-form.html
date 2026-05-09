@@ -1,0 +1,16 @@
+<!-- Vue de la FormGroup -->
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label for="lastName">Nom:</label>
+  <input id="lastName" type="text" formControlName="lastName" />
+  <br />
+  <br />
+
+  <label for="firstName">Prénom:</label>
+  <input id="firstName" type="text" formControlName="firstName" />
+
+  <br />
+  <br />
+
+  <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+</form>
