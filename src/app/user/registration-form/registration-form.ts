@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientServices, User } from '../../services/http-client-services';
 
 @Component({
   selector: 'app-registration-form',
@@ -8,9 +9,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './registration-form.html',
   styleUrl: './registration-form.css',
 })
-@Injectable({ providedIn: 'root' })
 export class RegistrationForm {
-  private http = inject(HttpClient);
+  usersRecup = inject(HttpClientServices);
+  users: User[] = [];
 
   /* Modèle de la FormGroup */
   registerForm = new FormGroup({
@@ -18,11 +19,14 @@ export class RegistrationForm {
     lastName: new FormControl(''),
   });
 
-  onSubmit() {
+  onSubmit(): void {
     // Usage of EventEmitter with form value
-    console.warn(this.registerForm.value);
-    this.http.get<unknown>('http://localhost:8000/api/check').subscribe((config) => {
-      console.warn(config);
+    console.log(this.registerForm.value);
+  }
+
+  showUsers() {
+    this.usersRecup.getUsers().subscribe((response) => {
+      this.users = response.data;
     });
   }
 }

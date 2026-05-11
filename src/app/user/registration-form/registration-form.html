@@ -14,3 +14,10 @@
 
   <button type="submit" [disabled]="!registerForm.valid">Submit</button>
 </form>
+
+<!-- <button type="submit" (click)="showUsers()">Afficher les utilisateurs</button> -->
+
+@for (user of users; track user.userId) {
+  <p>{{ user.name }}</p>
+  <p>{{ user.userId }}</p>
+}
