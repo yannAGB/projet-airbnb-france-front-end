@@ -9,13 +9,19 @@ import { HttpClientServices, User } from '../../services/http-client-services';
   styleUrl: './registration-form.css',
 })
 export class RegistrationForm {
-  usersRecup = inject(HttpClientServices);
+  usersInformations = inject(HttpClientServices);
   users: User[] = [];
 
   /* Modèle de la FormGroup */
   registerForm = new FormGroup({
+    civilite: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
+    userName: new FormControl(''),
+    role: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    birthday: new FormControl(''),
   });
 
   onSubmit(): void {
@@ -24,7 +30,7 @@ export class RegistrationForm {
   }
 
   showUsers() {
-    this.usersRecup.getUsers().subscribe((response) => {
+    this.usersInformations.getUsers().subscribe((response) => {
       this.users = response.data;
     });
   }
