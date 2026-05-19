@@ -35,3 +35,14 @@
 
   <button type="submit" [disabled]="!registerForm.valid">Submit</button>
 </form>
+
+@if (users.length > 0) {
+  <h1>Utilisateurs ({{ users.length }})</h1>
+
+  @for (user of users; track user.userId) {
+    <p>{{ user.userId }}</p>
+    <p>{{ user.name }}</p>
+  }
+} @else {
+  <p>Chargement en cours...</p>
+}

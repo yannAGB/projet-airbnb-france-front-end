@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { APP_SETTINGS } from '../app.settings';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpClientServices {
   private http = inject(HttpClient);
+  private apiUrl = inject(APP_SETTINGS).apiUrl;
 
-  getUsers() {
-    return this.http.get<ApiResponse<User[]>>(`${environment.apiBaseUrl}/api/check`);
+  getUsers(): Observable<ApiResponse<User[]>> {
+    return this.http.get<ApiResponse<User[]>>(`${this.apiUrl}/api/check`);
   }
 }
 

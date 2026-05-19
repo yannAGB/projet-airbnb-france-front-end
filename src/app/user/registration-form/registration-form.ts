@@ -1,4 +1,4 @@
-import { Component, inject, Injectable } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientServices, User } from '../../services/http-client-services';
 
@@ -8,30 +8,39 @@ import { HttpClientServices, User } from '../../services/http-client-services';
   templateUrl: './registration-form.html',
   styleUrl: './registration-form.css',
 })
-export class RegistrationForm {
-  usersInformations = inject(HttpClientServices);
+export class RegistrationForm implements OnInit {
+  private usersInformations = inject(HttpClientServices);
+
   users: User[] = [];
 
-  /* Modèle de la FormGroup */
   registerForm = new FormGroup({
     civilite: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    userName: new FormControl(''),
+    username: new FormControl(''),
     role: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
     birthday: new FormControl(''),
   });
 
-  onSubmit(): void {
-    // Usage of EventEmitter with form value
-    console.log(this.registerForm.value);
+  /* Chargement automatique au démarrage du composant */
+  ngOnInit(): void {
+    this.showUsers();
   }
 
-  showUsers() {
-    this.usersInformations.getUsers().subscribe((response) => {
-      this.users = response.data;
+  showUsers(): void {
+    this.usersInformations.getUsers().subscribe({
+      next: (response) => {
+        this.users = response.data;
+      },
+      error: (err) => {
+        console.error('Erreur chargement users', err);
+      },
     });
+  }
+
+  onSubmit(): void {
+    console.log(this.registerForm.value);
   }
 }
