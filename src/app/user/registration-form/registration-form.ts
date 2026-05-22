@@ -9,6 +9,9 @@ import { HttpClientServices, User } from '../../services/http-client-services';
   styleUrl: './registration-form.css',
 })
 export class RegistrationForm implements OnInit {
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
   private usersInformations = inject(HttpClientServices);
 
   users: User[] = [];
@@ -25,9 +28,23 @@ export class RegistrationForm implements OnInit {
   });
 
   /* Chargement automatique au démarrage du composant */
-  ngOnInit(): void {
+
+  /*   ngOnInit(): void {
     this.showUsers();
-  }
+
+	Affichage des utilisateurs HTML
+		<!-- @if (users.length > 0) {
+	<h1>Utilisateurs ({{ users.length }})</h1>
+
+	@for (user of users; track user.userId) {
+		<p>{{ user.userId }}</p>
+		<p>{{ user.name }}</p>
+	}
+	} @else {
+	<p>Chargement en cours...</p>
+	} -->
+
+  } */
 
   showUsers(): void {
     this.usersInformations.getUsers().subscribe({

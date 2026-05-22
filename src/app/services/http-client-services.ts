@@ -11,7 +11,7 @@ export class HttpClientServices {
   private apiUrl = inject(APP_SETTINGS).apiUrl;
 
   getUsers(): Observable<ApiResponse<User[]>> {
-    return this.http.get<ApiResponse<User[]>>(`${this.apiUrl}/api/check`);
+    return this.http.get<ApiResponse<User[]>>(`${this.apiUrl}/api/register`);
   }
 }
 
