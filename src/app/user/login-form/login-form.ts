@@ -31,7 +31,7 @@ export class LoginForm {
       next: (res) => {
         this.successMessage = 'Connexion réussie !';
         console.log('Utilisateur connecté', res.data);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message ?? 'Identifiants incorrects';
