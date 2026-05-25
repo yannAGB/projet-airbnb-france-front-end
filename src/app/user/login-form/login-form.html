@@ -1,1 +1,61 @@
-<p>login-form works!</p>
+<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h3 class="card-title text-center mb-4">Connexion</h3>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Identifiant (email ou username) -->
+          <div class="mb-3">
+            <label class="form-label" for="identifier"> Email ou nom d'utilisateur </label>
+            <input
+              class="form-control"
+              [class.is-invalid]="
+                loginForm.get('identifier')?.invalid && loginForm.get('identifier')?.touched
+              "
+              id="identifier"
+              type="text"
+              formControlName="identifier"
+              placeholder="email@exemple.com ou username"
+            />
+            <div class="invalid-feedback">Ce champ est obligatoire</div>
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="mb-3">
+            <label class="form-label" for="password">Mot de passe</label>
+            <input
+              class="form-control"
+              [class.is-invalid]="
+                loginForm.get('password')?.invalid && loginForm.get('password')?.touched
+              "
+              id="password"
+              type="password"
+              formControlName="password"
+            />
+            <div class="invalid-feedback">Le mot de passe est obligatoire</div>
+          </div>
+
+          <!-- Messages retour API -->
+          @if (successMessage) {
+            <div class="alert alert-success">{{ successMessage }}</div>
+          }
+          @if (errorMessage) {
+            <div class="alert alert-danger">{{ errorMessage }}</div>
+          }
+
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">
+              Se connecter
+            </button>
+          </div>
+
+          <p class="text-center mt-3 mb-0">
+            Pas encore de compte ?
+            <a routerLink="/register">S'inscrire</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,37 +1,201 @@
-<!-- Vue de la FormGroup -->
+<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h3 class="card-title text-center mb-4">Créer un compte</h3>
 
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <label for="lastName">Nom:</label>
-  <input id="lastName" type="text" formControlName="lastName" />
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- Nom / Prénom -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="lastName">Nom</label>
+              <input
+                class="form-control"
+                [class.is-invalid]="
+                  registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched
+                "
+                id="lastName"
+                type="text"
+                formControlName="lastName"
+              />
+              <div class="invalid-feedback">Le nom est obligatoire</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="firstName">Prénom</label>
+              <input
+                class="form-control"
+                [class.is-invalid]="
+                  registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched
+                "
+                id="firstName"
+                type="text"
+                formControlName="firstName"
+              />
+              <div class="invalid-feedback">Le prénom est obligatoire</div>
+            </div>
+          </div>
 
-  <label for="firstName">Prénom:</label>
-  <input id="firstName" type="text" formControlName="firstName" />
+          <!-- Nom d'utilisateur -->
+          <div class="mb-3">
+            <label class="form-label" for="username">Nom d'utilisateur</label>
+            <input
+              class="form-control"
+              [class.is-invalid]="
+                registerForm.get('username')?.invalid && registerForm.get('username')?.touched
+              "
+              id="username"
+              type="text"
+              formControlName="username"
+            />
+            <div class="invalid-feedback">Le nom d'utilisateur est obligatoire</div>
+          </div>
 
-  <label for="userName">Nom d'utilisateur:</label>
-  <input id="userName" type="text" formControlName="userName" />
+          <!-- Civilité -->
+          <div class="mb-3">
+            <label class="form-label" for="civilite">Civilité</label>
+            <select class="form-select" id="civilite" formControlName="civilite">
+              <option value="madame">Madame</option>
+              <option value="monsieur">Monsieur</option>
+              <option value="autre">Autre</option>
+              <option value="inconnu">Inconnu</option>
+            </select>
+          </div>
 
-  <label for="civilite">Cilité:</label>
-  <select name="civilite" id="civilite" formControlName="civilite">
-    <option value="madame">Madame</option>
-    <option value="autre">Autre</option>
-    <option value="monsieur" selected>Monsieur</option>
-    <option value="inconnu">Inconnu</option>
-  </select>
+          <!-- Rôle -->
+          <div class="mb-3">
+            <label class="form-label d-block">Rôle</label>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                id="role_user"
+                type="radio"
+                formControlName="role"
+                value="ROLE_USER"
+              />
+              <label class="form-check-label" for="role_user">Utilisateur</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                id="role_agence"
+                type="radio"
+                formControlName="role"
+                value="ROLE_IMMOBILIER"
+              />
+              <label class="form-check-label" for="role_agence">Agence immobilière</label>
+            </div>
+          </div>
 
-  <input id="utilisateur" type="radio" name="role" value="utilisateur" />
-  <label for="utilisateur">utilisateur</label>
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label" for="email">Adresse email</label>
+            <input
+              class="form-control"
+              [class.is-invalid]="
+                registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+              "
+              id="email"
+              type="email"
+              formControlName="email"
+            />
+            <div class="form-text">Nous ne partagerons jamais votre email.</div>
+            <div class="invalid-feedback">Format d'email invalide</div>
+          </div>
 
-  <input id="agence_immobiliere" type="radio" name="role" value="agence_immobiliere" />
-  <label for="agence_immobiliere">Agence immobilière</label>
+          <!-- Mot de passe -->
+          <div class="mb-3">
+            <label class="form-label" for="password">Mot de passe</label>
+            <input
+              class="form-control"
+              [class.is-invalid]="
+                registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+              "
+              id="password"
+              type="password"
+              formControlName="password"
+            />
+            <div class="invalid-feedback">8 caractères minimum</div>
+          </div>
 
-  <label for="email">Email:</label>
-  <input id="email" type="email" formControlName="email" />
+          <!-- Confirmation mot de passe -->
+          <div class="mb-3">
+            <label class="form-label" for="confirmPassword"> Confirmer le mot de passe </label>
+            <input
+              class="form-control"
+              [class.is-invalid]="registerForm.get('confirmPassword')?.touched && passwordsMismatch"
+              [class.is-valid]="
+                registerForm.get('confirmPassword')?.touched &&
+                !passwordsMismatch &&
+                registerForm.get('confirmPassword')?.value
+              "
+              id="confirmPassword"
+              type="password"
+              formControlName="confirmPassword"
+            />
+            @if (passwordsMismatch) {
+              <div class="invalid-feedback d-block">Les mots de passe ne correspondent pas</div>
+            }
+            @if (
+              !passwordsMismatch &&
+              registerForm.get('confirmPassword')?.touched &&
+              registerForm.get('confirmPassword')?.value
+            ) {
+              <div class="valid-feedback d-block">✓ Les mots de passe correspondent</div>
+            }
+          </div>
 
-  <label for="password">Password:</label>
-  <input id="password" type="password" formControlName="password" />
+          <!-- Date de naissance -->
+          <div class="mb-3">
+            <label class="form-label" for="birthday">Date de naissance</label>
+            <input
+              class="form-control"
+              [class.is-invalid]="
+                registerForm.get('birthday')?.invalid && registerForm.get('birthday')?.touched
+              "
+              id="birthday"
+              type="date"
+              formControlName="birthday"
+            />
+            <div class="invalid-feedback">La date de naissance est obligatoire</div>
+          </div>
 
-  <label for="birthday">Date de naissance:</label>
-  <input id="birthday" type="date" formControlName="birthday" />
+          <!-- CGU -->
+          <div class="mb-3 form-check">
+            <input
+              class="form-check-input"
+              [class.is-invalid]="
+                registerForm.get('agreeTerms')?.invalid && registerForm.get('agreeTerms')?.touched
+              "
+              type="checkbox"
+              formControlName="agreeTerms"
+              id="agreeTerms"
+            />
+            <label class="form-check-label" for="agreeTerms">
+              J'accepte les conditions d'utilisation
+            </label>
+            <div class="invalid-feedback">Vous devez accepter les conditions</div>
+          </div>
 
-  <button type="submit" [disabled]="!registerForm.valid">Submit</button>
-</form>
+          <!-- Messages retour API -->
+          @if (successMessage) {
+            <div class="alert alert-success">{{ successMessage }}</div>
+          }
+          @if (errorMessage) {
+            <div class="alert alert-danger">{{ errorMessage }}</div>
+          }
+
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid">
+              S'inscrire
+            </button>
+          </div>
+
+          <p class="text-center mt-3 mb-0">
+            Déjà un compte ?
+            <a routerLink="/login">Se connecter</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
