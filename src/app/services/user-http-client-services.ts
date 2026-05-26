@@ -22,7 +22,11 @@ export class UserHttpClientServices {
 
   /* ---- Connecter un utilisateur ---- */
   loginUser(payload: LoginPayload): Observable<ApiResponse<User>> {
-    return this.http.post<ApiResponse<User>>(`${this.apiUrl}/api/user/login`, payload);
+    return this.http.post<ApiResponse<User>>(`${this.apiUrl}/api/login`, payload);
+  }
+  /* ---- Récupérer l'utilisateur connecté ---- */
+  getMe(): Observable<ApiResponse<User>> {
+    return this.http.get<ApiResponse<User>>(`${this.apiUrl}/api/me`);
   }
 }
 
@@ -67,4 +71,5 @@ export interface ApiResponse<T> {
   success: boolean;
   message?: string;
   data: T;
+  token: string;
 }

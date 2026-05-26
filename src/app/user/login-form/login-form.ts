@@ -29,9 +29,10 @@ export class LoginForm {
 
     this.usersInformations.loginUser(this.loginForm.value as LoginPayload).subscribe({
       next: (res) => {
+        localStorage.setItem('access_token', res.token);
         this.successMessage = 'Connexion réussie !';
+        this.router.navigate(['/dashboard']);
         console.log('Utilisateur connecté', res.data);
-        this.router.navigate(['/home']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message ?? 'Identifiants incorrects';

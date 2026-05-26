@@ -1,1 +1,113 @@
-<p>dashboard works!</p>
+<nav class="navbar navbar-dark bg-dark px-4">
+  <span class="navbar-brand fw-bold">TrouvezMoi</span>
+
+  <div class="d-flex align-items-center gap-3">
+    @if (utilisateur()) {
+      <span class="text-white small">
+        {{ utilisateur()?.firstName }} {{ utilisateur()?.lastName }}
+      </span>
+    }
+    <button type="button" class="btn btn-outline-light btn-sm" (click)="seDeconnecter()">
+      Se déconnecter
+    </button>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  @if (chargement()) {
+    <div class="d-flex justify-content-center mt-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+    </div>
+  }
+
+  @if (erreur() && !chargement()) {
+    <div class="alert alert-danger d-flex justify-content-between align-items-center">
+      <span>{{ erreur() }}</span>
+      <button type="button" class="btn btn-sm btn-outline-danger" (click)="chargerUtilisateur()">
+        Réessayer
+      </button>
+    </div>
+  }
+
+  @if (utilisateur() && !chargement()) {
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Mon profil</h5>
+          </div>
+
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-6">
+                <small class="text-muted">Prénom</small>
+                <p class="fw-bold mb-0">{{ utilisateur()?.firstName }}</p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Nom</small>
+                <p class="fw-bold mb-0">{{ utilisateur()?.lastName }}</p>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <small class="text-muted">Nom d'utilisateur</small>
+              <p class="fw-bold mb-0">{{ utilisateur()?.username }}</p>
+            </div>
+
+            <div class="mb-3">
+              <small class="text-muted">Email</small>
+              <p class="fw-bold mb-0">{{ utilisateur()?.email }}</p>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-6">
+                <small class="text-muted">Statut</small>
+                <p class="mb-0">
+                  @if (utilisateur()?.is_valid) {
+                    <span class="badge bg-success">Actif</span>
+                  } @else {
+                    <span class="badge bg-warning text-dark">En attente</span>
+                  }
+                </p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Rôle</small>
+                <div class="d-flex flex-wrap gap-1">
+                  @for (role of utilisateur()?.roles ?? []; track role) {
+                    @if (role !== 'ROLE_USER') {
+                      <span class="badge bg-secondary">{{ role }}</span>
+                    }
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <small class="text-muted">Date de naissance</small>
+              <p class="fw-bold mb-0">{{ utilisateur()?.birthday }}</p>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Membre depuis</small>
+                <p class="fw-bold mb-0">{{ utilisateur()?.created_at }}</p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Dernière connexion</small>
+                <p class="fw-bold mb-0">{{ utilisateur()?.last_login }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer text-end">
+            <button type="button" class="btn btn-danger btn-sm" (click)="seDeconnecter()">
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
