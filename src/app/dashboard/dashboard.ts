@@ -5,7 +5,7 @@ import { UserHttpClientServices, User } from '../services/user-http-client-servi
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
