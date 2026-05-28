@@ -1,0 +1,13 @@
+<section class="destinations-section">
+  <div class="container-fluid px-5">
+    <h2 class="section-title mb-4">Découvrez nos destinations populaires</h2>
+
+    <div class="row g-3">
+      @for (p of properties; track p.id) {
+        <div class="col-sm-6 col-md-3">
+          <app-property-card [property]="p" />
+        </div>
+      }
+    </div>
+  </div>
+</section>

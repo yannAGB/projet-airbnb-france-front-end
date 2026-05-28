@@ -1,0 +1,50 @@
+.coeur-section {
+  padding: 60px 0;
+  background: #fff;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.ctrl-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.ctrl-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item-custom {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+}

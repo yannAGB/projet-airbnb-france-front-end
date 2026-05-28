@@ -1,0 +1,14 @@
+<div class="category-filter-wrapper">
+  <div class="category-scroll">
+    @for (cat of categories; track cat.label) {
+      <button
+        class="category-chip"
+        [class.active]="active() === cat.label"
+        (click)="active.set(cat.label)"
+      >
+        <i class="bi {{ cat.icon }}"></i>
+        {{ cat.label }}
+      </button>
+    }
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<section class="coeur-section">
+  <div class="container-fluid px-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title">Logements coup de cœur</h2>
+      <div class="carousel-controls">
+        <button class="ctrl-btn" (click)="scrollLeft()">‹</button>
+        <button class="ctrl-btn" (click)="scrollRight()">›</button>
+      </div>
+    </div>
+
+    <div class="carousel-track" #track>
+      @for (p of properties; track p.id) {
+        <div class="carousel-item-custom">
+          <app-property-card [property]="p" />
+        </div>
+      }
+    </div>
+  </div>
+</section>

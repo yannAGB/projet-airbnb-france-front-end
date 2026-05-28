@@ -1,0 +1,57 @@
+<footer class="footer">
+  <div class="container-fluid px-5">
+    <!-- Idées voyages -->
+    <div class="footer-ideas">
+      <h5 class="footer-section-title">Des idées pour vos prochains projets</h5>
+      <div class="row g-4 mt-2">
+        @for (col of ideesColonnes; track col.title) {
+          <div class="col-6 col-md-3">
+            <h6 class="footer-col-title">{{ col.title }}</h6>
+            <ul class="footer-links">
+              @for (link of col.links; track link) {
+                <li>
+                  <a href="#">{{ link }}</a>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <!-- Liens bas -->
+    <div class="row g-4 py-4">
+      @for (col of footerColonnes; track col.title) {
+        <div class="col-6 col-md-3">
+          <h6 class="footer-col-title">{{ col.title }}</h6>
+          <ul class="footer-links">
+            @for (link of col.links; track link) {
+              <li>
+                <a href="#">{{ link }}</a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <hr class="footer-divider" />
+
+    <!-- Bas de page -->
+    <div class="footer-bottom">
+      <span>© 2025 TrouvezMoi.com</span>
+      <div class="footer-bottom-links">
+        <a href="#">Confidentialité</a>
+        <a href="#">Conditions</a>
+        <a href="#">Plan du site</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-twitter-x"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
