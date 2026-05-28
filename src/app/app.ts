@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RegistrationForm } from './user/registration-form/registration-form';
+import { RegistrationForm } from './pages/registration/registration-form';
 import { APP_SETTINGS } from './app.settings';
-import { LoginForm } from './user/login-form/login-form';
+import { LoginForm } from './pages/login/login-form';
 
 @Component({
   selector: 'app-root',
