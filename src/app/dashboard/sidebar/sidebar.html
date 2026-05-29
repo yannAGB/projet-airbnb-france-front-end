@@ -1,0 +1,20 @@
+<aside class="sidebar">
+  <ul class="sidebar-menu">
+    @for (item of menu; track item.label) {
+      <li>
+        <a
+          [routerLink]="item.route"
+          class="sidebar-item"
+          [class.actif]="actif() === item.label"
+          (click)="selectionner(item.label)"
+        >
+          <i class="bi {{ item.icon }}"></i>
+          <span class="item-label">{{ item.label }}</span>
+          @if (item.badge) {
+            <span class="item-badge">{{ item.badge }}</span>
+          }
+        </a>
+      </li>
+    }
+  </ul>
+</aside>
