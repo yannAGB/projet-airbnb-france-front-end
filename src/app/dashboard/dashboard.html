@@ -1,0 +1,55 @@
+<app-dashboard-navbar />
+
+<div class="dash-wrapper">
+  <!-- En-tête page -->
+  <div class="dash-header">
+    <div>
+      @if (chargement()) {
+        <h1 class="dash-title">Bienvenue 👋</h1>
+      } @else {
+        <h1 class="dash-title">Bienvenue {{ utilisateur()?.firstName }} 👋</h1>
+      }
+      <p class="dash-subtitle">Gérez vos réservations et vos annonces en toute simplicité.</p>
+    </div>
+    <a href="#" class="btn-ajouter">
+      <i class="bi bi-plus-lg"></i>
+      Ajouter une annonce
+    </a>
+  </div>
+
+  <!-- Grille principale -->
+  <div class="dash-grid">
+    <!-- Colonne sidebar -->
+    <aside class="col-sidebar">
+      <!-- <app-sidebar /> -->
+    </aside>
+
+    <!-- Colonne contenu -->
+    <main class="col-main">
+      <!--       <app-reservations-a-venir />
+      <app-reservations-programmees /> -->
+    </main>
+
+    <!-- Colonne droite -->
+    <aside class="col-right">
+      <!--       <app-statistiques />
+      <app-dernier-message />
+      <app-gestion-rapide />
+      <app-ameliorer-classement /> -->
+    </aside>
+  </div>
+
+  <!-- Section bas -->
+  <div class="dash-bottom">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <!-- <app-pense-bete /> -->
+      </div>
+      <div class="col-lg-5">
+        <!-- <app-gestion-rapide titre="Accès rapide" /> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer />

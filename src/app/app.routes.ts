@@ -9,17 +9,16 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login-form').then((m) => m.LoginForm),
+    loadComponent: () => import('./login/login-form').then((m) => m.LoginForm),
   },
   {
     path: 'register',
-    loadComponent: () =>
-      import('./pages/registration/registration-form').then((m) => m.RegistrationForm),
+    loadComponent: () => import('./registration/registration-form').then((m) => m.RegistrationForm),
   },
   {
     path: 'dashboard',
     canActivate: [authGuard],
-    loadComponent: () => import('./pages/dashboard/dashboard').then((m) => m.Dashboard),
+    loadComponent: () => import('./dashboard/dashboard').then((m) => m.DashboardComponent),
   },
   /*   {
     path: '',

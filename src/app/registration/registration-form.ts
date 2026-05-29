@@ -13,7 +13,7 @@ import {
   UserHttpClientServices,
   RegisterPayload,
   User,
-} from '../../services/user-http-client-services';
+} from '../services/user-http-client-services';
 
 /* -------------------------------------------------- */
 /*         Validator - confirmation mot de passe      */
