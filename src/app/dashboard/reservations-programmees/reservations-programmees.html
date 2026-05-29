@@ -1,0 +1,12 @@
+<div class="section-card">
+  <h5 class="section-title">Réservations programmées</h5>
+  <div class="resa-list">
+    @for (r of reservations(); track r.id) {
+      <app-reservation-card
+        [reservation]="r"
+        (accepter)="accepterReservation($event)"
+        (refuser)="refuserReservation($event)"
+      />
+    }
+  </div>
+</div>

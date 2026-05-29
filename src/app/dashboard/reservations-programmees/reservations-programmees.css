@@ -1,0 +1,19 @@
+.section-card {
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+
+.resa-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
