@@ -1,0 +1,37 @@
+<div class="stats-card">
+  <h6 class="card-title-sm">Statistiques ce mois-ci</h6>
+
+  @for (stat of stats; track stat.label) {
+    <div class="stat-row">
+      <span class="stat-label">{{ stat.label }}</span>
+      <span class="stat-val">{{ stat.valeur }}</span>
+      <span
+        class="trend-badge"
+        [class.trend-up]="stat.trend > 0"
+        [class.trend-down]="stat.trend < 0"
+      >
+        <i
+          class="bi"
+          [class.bi-arrow-up]="stat.trend > 0"
+          [class.bi-arrow-down]="stat.trend < 0"
+        ></i>
+        {{ stat.trend > 0 ? '+' : '' }}{{ stat.trend }}%
+      </span>
+    </div>
+  }
+
+  <!-- Note -->
+  <div class="rating-row">
+    <span class="rating-num">4.8</span>
+    <div class="stars">
+      @for (s of stars; track s) {
+        <i
+          class="bi bi-star-fill"
+          [style.color]="s < 5 ? 'var(--orange)' : '#DDD'"
+          style="font-size: 12px"
+        ></i>
+      }
+    </div>
+    <span class="trend-badge trend-up">41 avis</span>
+  </div>
+</div>
