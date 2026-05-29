@@ -1,0 +1,13 @@
+<div class="gr-card">
+  <h6 class="card-title-sm">{{ titre }}</h6>
+  <div class="gr-grid">
+    @for (action of actions; track action.label) {
+      <a [routerLink]="action.route" class="gr-item">
+        <div class="gr-icon" [style.background]="action.color">
+          <i class="bi {{ action.icon }}"></i>
+        </div>
+        <span class="gr-label">{{ action.label }}</span>
+      </a>
+    }
+  </div>
+</div>
