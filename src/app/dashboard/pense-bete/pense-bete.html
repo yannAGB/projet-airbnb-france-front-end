@@ -1,0 +1,33 @@
+<div class="pb-card">
+  <div class="pb-header">
+    <i class="bi bi-list-check pb-icon"></i>
+    <h5 class="pb-title">Pense-Bête</h5>
+  </div>
+
+  <!-- Tâches à faire -->
+  <div class="taches-todo">
+    @for (t of taches; track t.id) {
+      <div class="tache-item">
+        <i class="bi bi-arrow-right-circle-fill todo-icon"></i>
+        <div class="tache-content">
+          <span class="tache-texte">{{ t.texte }}</span>
+          <span class="tache-sous">{{ t.sousTitre }}</span>
+        </div>
+        <span class="tache-date">{{ t.date }} ›</span>
+      </div>
+    }
+  </div>
+
+  <hr class="pb-divider" />
+
+  <!-- Tâches terminées -->
+  <div class="taches-done">
+    @for (t of tachesFaites; track t.id) {
+      <div class="tache-done">
+        <i class="bi bi-check-circle-fill done-icon"></i>
+        <span class="tache-done-texte">{{ t.texte }}</span>
+        <i class="bi bi-chevron-right chev-right"></i>
+      </div>
+    }
+  </div>
+</div>

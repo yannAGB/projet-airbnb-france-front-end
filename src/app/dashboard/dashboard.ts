@@ -10,8 +10,7 @@ import { StatistiquesComponent } from './statistiques/statistiques';
 import { DernierMessageComponent } from './dernier-message/dernier-message';
 import { GestionRapideComponent } from './gestion-rapide/gestion-rapide';
 import { AmeliorerClassementComponent } from './ameliorer-classement/ameliorer-classement';
-/* 
-import { PenseBeteComponent } from './pense-bete/pense-bete'; */
+import { PenseBeteComponent } from './pense-bete/pense-bete';
 import { FooterComponent } from '../shared/footer/footer';
 
 @Component({
@@ -26,8 +25,7 @@ import { FooterComponent } from '../shared/footer/footer';
     DernierMessageComponent,
     GestionRapideComponent,
     AmeliorerClassementComponent,
-    /*     
-    PenseBeteComponent, */
+    PenseBeteComponent,
     FooterComponent,
   ],
   templateUrl: './dashboard.html',
