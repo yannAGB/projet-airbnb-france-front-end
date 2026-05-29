@@ -4,8 +4,8 @@ import { AuthService } from '../services/auth/auth.service';
 import { UserHttpClientServices, User } from '../services/user-http-client-services';
 import { DashboardNavbarComponent } from './dashboard-navbar/dashboard-navbar';
 import { SidebarComponent } from './sidebar/sidebar';
-/* 
 import { ReservationsAVenirComponent } from './reservations-a-venir/reservations-a-venir';
+/* 
 import { ReservationsProgrammeesComponent } from './reservations-programmees/reservations-programmees';
 import { StatistiquesComponent } from './statistiques/statistiques';
 import { DernierMessageComponent } from './dernier-message/dernier-message';
@@ -20,8 +20,8 @@ import { FooterComponent } from '../shared/footer/footer';
     RouterLink,
     DashboardNavbarComponent,
     SidebarComponent,
-    /*     
     ReservationsAVenirComponent,
+    /*     
     ReservationsProgrammeesComponent,
     StatistiquesComponent,
     DernierMessageComponent,
