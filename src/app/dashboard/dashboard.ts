@@ -9,8 +9,8 @@ import { ReservationsProgrammeesComponent } from './reservations-programmees/res
 import { StatistiquesComponent } from './statistiques/statistiques';
 import { DernierMessageComponent } from './dernier-message/dernier-message';
 import { GestionRapideComponent } from './gestion-rapide/gestion-rapide';
-/* 
 import { AmeliorerClassementComponent } from './ameliorer-classement/ameliorer-classement';
+/* 
 import { PenseBeteComponent } from './pense-bete/pense-bete'; */
 import { FooterComponent } from '../shared/footer/footer';
 
@@ -25,8 +25,8 @@ import { FooterComponent } from '../shared/footer/footer';
     StatistiquesComponent,
     DernierMessageComponent,
     GestionRapideComponent,
-    /*     
     AmeliorerClassementComponent,
+    /*     
     PenseBeteComponent, */
     FooterComponent,
   ],
