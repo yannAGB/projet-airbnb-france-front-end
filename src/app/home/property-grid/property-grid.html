@@ -1,11 +1,11 @@
-<section class="property-grid-section">
-  <div class="container-fluid px-5">
-    <div class="section-header">
+<section class="pg-section" id="logements">
+  <div class="container-xxl px-4 px-lg-5">
+    <div class="section-head">
       <h2 class="section-title">Quel type d'hébergement cherchez-vous ?</h2>
     </div>
 
     <div class="row g-4">
-      <!-- Grille de cartes -->
+      <!-- Grille cartes -->
       <div class="col-lg-7">
         <div class="row g-3">
           @for (p of properties; track p.id) {
@@ -15,13 +15,16 @@
           }
         </div>
         <div class="text-center mt-4">
-          <a href="#" class="voir-plus">Voir plus d'hébergements →</a>
+          <a href="#" class="btn-voir-plus">
+            Voir plus d'hébergements
+            <i class="bi bi-arrow-right ms-2"></i>
+          </a>
         </div>
       </div>
 
       <!-- Carte -->
       <div class="col-lg-5">
-        <div class="map-wrapper">
+        <div class="map-box">
           <app-map />
         </div>
       </div>

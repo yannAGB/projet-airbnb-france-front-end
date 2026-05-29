@@ -1,10 +1,10 @@
-.destinations-section {
-  padding: 60px 0;
-  background: #f9f9fb;
+.dest-section {
+  padding: 64px 0;
+  background: var(--gray-bg);
 }
 
 .section-title {
   font-size: 26px;
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--navy);
 }

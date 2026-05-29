@@ -1,34 +1,44 @@
 .coeur-section {
-  padding: 60px 0;
+  padding: 64px 0;
   background: #fff;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
 }
 
 .section-title {
   font-size: 26px;
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--navy);
 }
 
-.carousel-controls {
+.ctrl-btns {
   display: flex;
   gap: 10px;
 }
 
-.ctrl-btn {
-  width: 40px;
-  height: 40px;
+.ctrl {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 1.5px solid #ddd;
+  border: 1.5px solid var(--gray-border);
   background: #fff;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
   transition: all 0.2s;
-  line-height: 1;
 }
 
-.ctrl-btn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+.ctrl:hover {
+  border-color: var(--orange);
+  color: var(--orange);
 }
 
 .carousel-track {
@@ -37,14 +47,14 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .carousel-track::-webkit-scrollbar {
   display: none;
 }
 
-.carousel-item-custom {
-  flex: 0 0 280px;
+.carousel-item-wrap {
+  flex: 0 0 290px;
   scroll-snap-align: start;
 }

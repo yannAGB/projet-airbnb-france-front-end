@@ -3,8 +3,9 @@ import { authGuard } from './services/auth/guard/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     loadComponent: () => import('./home/home').then((m) => m.HomeComponent),
+    pathMatch: 'full',
   },
   {
     path: 'login',
@@ -20,9 +21,9 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./pages/dashboard/dashboard').then((m) => m.Dashboard),
   },
-  {
+  /*   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-  },
+  }, */
 ];

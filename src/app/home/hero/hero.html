@@ -1,43 +1,43 @@
 <section class="hero">
   <div class="hero-overlay"></div>
-  <div class="container-fluid px-5 position-relative z-1">
-    <div class="row align-items-center" style="min-height: 420px">
-      <div class="col-lg-5 py-5">
-        <h1 class="hero-title">
-          Trouvez l'hébergement<br />
-          <span class="hero-accent">qui vous ressemble</span>
-        </h1>
-        <p class="hero-subtitle">
-          Des millions de locations de qualité<br />
-          partout en France et au monde USA.
-        </p>
 
-        <div class="hero-stats d-flex gap-4 mt-4">
-          <div class="stat-item">
-            <i class="bi bi-geo-alt-fill text-primary-c"></i>
-            <span class="stat-value">30,678</span>
-            <span class="stat-label">locations disponibles</span>
-          </div>
-          <div class="stat-item">
-            <i class="bi bi-star-fill text-primary-c"></i>
-            <span class="stat-value">650+</span>
-            <span class="stat-label">Hôtes de confiance</span>
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">
+        Trouvez l'hébergement<br />
+        <span class="accent">qui vous ressemble</span>
+      </h1>
+      <p class="hero-sub">
+        Des millions de locations de qualité<br />
+        partout en France et au monde USA.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <i class="bi bi-geo-alt-fill"></i>
+          <div>
+            <strong>30 678</strong>
+            <span>locations disponibles</span>
           </div>
         </div>
-
-        <div class="d-flex gap-3 mt-4">
-          <a href="#search" class="btn-hero-primary"> Explorer les hébergements </a>
-          <a href="#" class="btn-hero-secondary">
-            <i class="bi bi-play-circle me-2"></i>Voir la vidéo
-          </a>
+        <div class="stat">
+          <i class="bi bi-star-fill"></i>
+          <div>
+            <strong>650+</strong>
+            <span>Hôtes de confiance</span>
+          </div>
         </div>
+      </div>
+
+      <div class="hero-btns">
+        <a href="#logements" class="btn-primary">Explorer les hébergements</a>
+        <a href="#" class="btn-secondary"> <i class="bi bi-play-circle-fill"></i> Voir la vidéo </a>
       </div>
     </div>
   </div>
 
-  <!-- Search bar -->
-  <div class="hero-search-wrapper">
-    <div class="container-fluid px-5">
+  <div class="hero-search">
+    <div class="container-fluid px-4 px-lg-5">
       <app-search-bar />
     </div>
   </div>

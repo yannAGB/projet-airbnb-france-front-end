@@ -1,16 +1,20 @@
 <section class="coeur-section">
-  <div class="container-fluid px-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+  <div class="container-xxl px-4 px-lg-5">
+    <div class="section-head">
       <h2 class="section-title">Logements coup de cœur</h2>
-      <div class="carousel-controls">
-        <button class="ctrl-btn" (click)="scrollLeft()">‹</button>
-        <button class="ctrl-btn" (click)="scrollRight()">›</button>
+      <div class="ctrl-btns">
+        <button type="button" class="ctrl" (click)="scrollLeft()">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button type="button" class="ctrl" (click)="scrollRight()">
+          <i class="bi bi-chevron-right"></i>
+        </button>
       </div>
     </div>
 
     <div class="carousel-track" #track>
       @for (p of properties; track p.id) {
-        <div class="carousel-item-custom">
+        <div class="carousel-item-wrap">
           <app-property-card [property]="p" />
         </div>
       }

@@ -1,48 +1,38 @@
 <div class="search-bar">
-  <div class="row g-0 align-items-center">
-    <!-- Destination -->
-    <div class="col-lg-3 search-field border-end">
-      <label class="search-label">
-        <i class="bi bi-geo-alt-fill text-primary-c me-1"></i>
-        Où allez-vous ?
-      </label>
-      <input type="text" class="search-input" placeholder="Paris, Lyon, Bordeaux..." />
+  <div class="sb-row">
+    <div class="sb-field">
+      <label class="sb-label"> <i class="bi bi-geo-alt-fill"></i> Où allez-vous ? </label>
+      <input class="sb-input" type="text" placeholder="Paris, Lyon, Nice..." />
     </div>
 
-    <!-- Arrivée -->
-    <div class="col-lg-2 search-field border-end">
-      <label class="search-label">
-        <i class="bi bi-calendar3 me-1"></i>
-        Arrivée
-      </label>
-      <input type="date" class="search-input" />
+    <div class="sb-divider"></div>
+
+    <div class="sb-field">
+      <label class="sb-label"> <i class="bi bi-calendar3"></i> Arrivée </label>
+      <input class="sb-input" type="date" />
     </div>
 
-    <!-- Départ -->
-    <div class="col-lg-2 search-field border-end">
-      <label class="search-label">
-        <i class="bi bi-calendar3 me-1"></i>
-        Départ
-      </label>
-      <input type="date" class="search-input" />
+    <div class="sb-divider"></div>
+
+    <div class="sb-field">
+      <label class="sb-label"> <i class="bi bi-calendar3"></i> Départ </label>
+      <input class="sb-input" type="date" />
     </div>
 
-    <!-- Voyageurs -->
-    <div class="col-lg-3 search-field border-end">
-      <label class="search-label">
-        <i class="bi bi-people-fill me-1"></i>
-        Voyageurs
-      </label>
-      <div class="voyageurs-counter">
+    <div class="sb-divider"></div>
+
+    <div class="sb-field">
+      <label class="sb-label"> <i class="bi bi-people-fill"></i> Voyageurs </label>
+      <div class="counter">
         <button type="button" (click)="decrement()">−</button>
-        <span>{{ voyageurs }} voyageur{{ voyageurs > 1 ? 's' : '' }}</span>
+        <span>{{ voyageurs() }} voyageur{{ voyageurs() > 1 ? 's' : '' }}</span>
         <button type="button" (click)="increment()">+</button>
       </div>
     </div>
 
-    <!-- Bouton -->
-    <div class="col-lg-2 search-btn-col">
-      <button class="btn-search"><i class="bi bi-search me-2"></i>Rechercher</button>
-    </div>
+    <button class="btn-search" type="button">
+      <i class="bi bi-search"></i>
+      Rechercher
+    </button>
   </div>
 </div>

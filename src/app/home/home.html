@@ -1,17 +1,25 @@
 <app-navbar />
 
 <main>
+  <!-- Hero et barre de recherche -->
   <app-hero />
 
-  <div class="content-wrapper">
-    <div class="container-fluid px-5">
-      <app-category-filter />
-    </div>
+  <!-- Espace pour la barre de recherche flottante -->
+  <div class="search-spacer"></div>
 
-    <app-property-grid />
-    <app-coup-de-coeur />
-    <app-destinations />
+  <!-- Filtres catégories -->
+  <div class="container-xxl px-4 px-lg-5">
+    <app-category-filter />
   </div>
+
+  <!-- Grille logements + carte -->
+  <app-property-grid />
+
+  <!-- Carousel coup de cœur -->
+  <app-coup-de-coeur />
+
+  <!-- Destinations populaires -->
+  <app-destinations />
 </main>
 
 <app-footer />
