@@ -1,0 +1,39 @@
+<div class="resa-card" [class.highlighted]="reservation.statut === 'a_confirmer'">
+  <!-- Gauche -->
+  <div class="resa-left">
+    <img [src]="reservation.avatar" [alt]="reservation.nom" class="resa-avatar" loading="lazy" />
+    <div class="resa-info">
+      <p class="resa-nom">{{ reservation.nom }}</p>
+      <p class="resa-logement"><i class="bi bi-geo-alt-fill"></i> {{ reservation.logement }}</p>
+      <div class="resa-meta">
+        <span><i class="bi bi-calendar3"></i> {{ reservation.dates }}</span>
+        <span>
+          <i class="bi bi-moon"></i>
+          {{ reservation.nuits }} nuit{{ reservation.nuits > 1 ? 's' : '' }}
+        </span>
+        <span>
+          <i class="bi bi-people"></i>
+          {{ reservation.voyageurs }} voyageur{{ reservation.voyageurs > 1 ? 's' : '' }}
+        </span>
+      </div>
+      @if (reservation.note) {
+        <div class="resa-note"><i class="bi bi-info-circle"></i> {{ reservation.note }}</div>
+      }
+    </div>
+  </div>
+
+  <!-- Droite -->
+  <div class="resa-right">
+    <p class="resa-montant">{{ reservation.montant }}€</p>
+    <span class="resa-statut" [class]="statutClass">{{ statutLabel }}</span>
+
+    @if (reservation.statut === 'a_confirmer') {
+      <div class="resa-actions">
+        <button class="btn-accepter" (click)="accepter.emit(reservation.id)">Accepter</button>
+        <button class="btn-refuser" (click)="refuser.emit(reservation.id)">Refuser</button>
+      </div>
+    } @else {
+      <a href="#" class="btn-detail">Voir détails</a>
+    }
+  </div>
+</div>

@@ -1,0 +1,167 @@
+.resa-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  gap: 12px;
+  transition: box-shadow 0.2s;
+}
+
+.resa-card:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.resa-card.highlighted {
+  border-color: #f5a623;
+  background: #fffcf5;
+}
+
+.resa-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.resa-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.resa-info {
+  min-width: 0;
+}
+
+.resa-nom {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+
+.resa-logement {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.resa-logement i {
+  color: var(--orange);
+  margin-right: 2px;
+}
+
+.resa-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.resa-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #777;
+}
+
+.resa-note {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #999;
+  margin-top: 6px;
+}
+
+.resa-note i {
+  color: #f5a623;
+}
+
+.resa-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 110px;
+}
+
+.resa-montant {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.resa-statut {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.st-attente {
+  background: #fff3e0;
+  color: #e65100;
+}
+.st-confirme {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+.st-a-confirmer {
+  background: #fff8e1;
+  color: #f57f17;
+}
+.st-annule {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.resa-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-accepter {
+  padding: 6px 14px;
+  background: #1b5e20;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-accepter:hover {
+  opacity: 0.85;
+}
+
+.btn-refuser {
+  padding: 6px 14px;
+  background: transparent;
+  color: #b71c1c;
+  border: 1.5px solid #b71c1c;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-refuser:hover {
+  background: #ffebee;
+}
+
+.btn-detail {
+  font-size: 12px;
+  color: var(--navy);
+  text-underline-offset: 3px;
+  text-decoration: underline;
+}
