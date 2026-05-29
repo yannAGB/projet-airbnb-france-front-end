@@ -7,8 +7,8 @@ import { SidebarComponent } from './sidebar/sidebar';
 import { ReservationsAVenirComponent } from './reservations-a-venir/reservations-a-venir';
 import { ReservationsProgrammeesComponent } from './reservations-programmees/reservations-programmees';
 import { StatistiquesComponent } from './statistiques/statistiques';
-/* 
 import { DernierMessageComponent } from './dernier-message/dernier-message';
+/* 
 import { GestionRapideComponent } from './gestion-rapide/gestion-rapide';
 import { AmeliorerClassementComponent } from './ameliorer-classement/ameliorer-classement';
 import { PenseBeteComponent } from './pense-bete/pense-bete'; */
@@ -23,8 +23,8 @@ import { FooterComponent } from '../shared/footer/footer';
     ReservationsAVenirComponent,
     ReservationsProgrammeesComponent,
     StatistiquesComponent,
-    /*     
     DernierMessageComponent,
+    /*     
     GestionRapideComponent,
     AmeliorerClassementComponent,
     PenseBeteComponent, */
