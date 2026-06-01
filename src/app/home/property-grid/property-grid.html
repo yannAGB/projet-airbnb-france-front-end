@@ -7,19 +7,33 @@
     <div class="row g-4">
       <!-- Grille cartes -->
       <div class="col-lg-7">
-        <div class="row g-3">
-          @for (p of properties; track p.id) {
-            <div class="col-sm-6 col-md-4">
-              <app-property-card [property]="p" [compact]="true" />
+        @if (chargement()) {
+          <div class="d-flex justify-content-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Chargement...</span>
             </div>
-          }
-        </div>
-        <div class="text-center mt-4">
-          <a href="#" class="btn-voir-plus">
-            Voir plus d'hébergements
-            <i class="bi bi-arrow-right ms-2"></i>
-          </a>
-        </div>
+          </div>
+        }
+
+        @if (erreur() && !chargement()) {
+          <div class="alert alert-warning">{{ erreur() }}</div>
+        }
+
+        @if (!chargement() && !erreur()) {
+          <div class="row g-3">
+            @for (p of properties; track p.id) {
+              <div class="col-sm-6 col-md-4">
+                <app-property-card [property]="p" [compact]="true" />
+              </div>
+            }
+          </div>
+          <div class="text-center mt-4">
+            <a href="#" class="btn-voir-plus">
+              Voir plus d'hébergements
+              <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+          </div>
+        }
       </div>
 
       <!-- Carte -->
