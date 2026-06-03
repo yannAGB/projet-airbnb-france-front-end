@@ -96,4 +96,18 @@ export class RealEstateHttpClientServices {
   getRealEstateBySlug(slug: string): Observable<RealEstateSingleResponse> {
     return this.http.get<RealEstateSingleResponse>(`${this.apiUrl}/api/real-estates/slug/${slug}`);
   }
+
+  /* ---- Logements coup de coeur limités (page d'accueil) ---- */
+  getCoupDeCoeur(limit = 6): Observable<RealEstateApiResponse> {
+    return this.http.get<RealEstateApiResponse>(
+      `${this.apiUrl}/api/real-estates/coup-de-coeur?limit=${limit}`,
+    );
+  }
+
+  /* ---- Logements destinations populaires limités (page d'accueil) ---- */
+  getDestinations(limit = 5): Observable<RealEstateApiResponse> {
+    return this.http.get<RealEstateApiResponse>(
+      `${this.apiUrl}/api/real-estates/destinations?limit=${limit}`,
+    );
+  }
 }
