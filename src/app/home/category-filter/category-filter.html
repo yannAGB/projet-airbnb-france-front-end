@@ -1,14 +1,34 @@
 <div class="cf-wrapper">
   <div class="cf-scroll">
-    @for (cat of categories; track cat.label) {
+    <!-- Bouton "Tous" toujours présent -->
+    <button
+      type="button"
+      class="chip"
+      [class.chip-active]="active() === 'Tous'"
+      (click)="selecter('Tous')"
+    >
+      <i class="bi bi-grid-fill"></i>
+      Tous
+    </button>
+
+    @if (chargement()) {
+      @for (n of [1, 2, 3, 4, 5]; track n) {
+        <div class="chip-skeleton"></div>
+      }
+    }
+
+    @for (cat of categories(); track cat.id) {
       <button
         type="button"
         class="chip"
-        [class.chip-active]="active() === cat.label"
-        (click)="selecter(cat.label)"
+        [class.chip-active]="active() === cat.title"
+        (click)="selecter(cat.title)"
       >
-        <i class="bi {{ cat.icon }}"></i>
-        {{ cat.label }}
+        <i class="bi {{ icone(cat.slug) }}"></i>
+        {{ cat.title }}
+        @if (cat.nbLogements > 0) {
+          <span class="chip-count">{{ cat.nbLogements }}</span>
+        }
       </button>
     }
   </div>

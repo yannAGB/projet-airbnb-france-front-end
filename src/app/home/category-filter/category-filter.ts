@@ -1,8 +1,23 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import {
+  CategorieHttpClientServices,
+  Categorie,
+} from '../../services/categorie/categorie-http-client-services';
 
-interface Categorie {
-  label: string;
-  icon: string;
+/* Mapping icônes par slug ou titre */
+const ICONES: Record<string, string> = {
+  appartement: 'bi-building',
+  villa: 'bi-house-heart-fill',
+  maison: 'bi-house-fill',
+  studio: 'bi-door-open-fill',
+  loft: 'bi-grid-1x2-fill',
+  cabane: 'bi-tree-fill',
+  chateau: 'bi-bank2',
+  bungalow: 'bi-umbrella-fill',
+};
+
+function icone(slug: string): string {
+  return ICONES[slug] ?? 'bi-grid-fill';
 }
 
 @Component({
@@ -10,21 +25,26 @@ interface Categorie {
   templateUrl: './category-filter.html',
   styleUrl: './category-filter.css',
 })
-export class CategoryFilterComponent {
-  active = signal<string>('Tous');
+export class CategoryFilterComponent implements OnInit {
+  private categorieService = new CategorieHttpClientServices();
 
-  readonly categories: Categorie[] = [
-    { label: 'Tous', icon: 'bi-grid-fill' },
-    { label: 'Boulodrome', icon: 'bi-trophy-fill' },
-    { label: 'Jazz', icon: 'bi-music-note-beamed' },
-    { label: 'Places', icon: 'bi-map-fill' },
-    { label: 'Conditions actuelles', icon: 'bi-cloud-sun-fill' },
-    { label: 'Gym', icon: 'bi-activity' },
-    { label: 'Nature', icon: 'bi-tree-fill' },
-    { label: 'Plage', icon: 'bi-water' },
-    { label: 'Montagne', icon: 'bi-triangle-fill' },
-    { label: 'Luxe', icon: 'bi-gem' },
-  ];
+  active = signal<string>('Tous');
+  categories = signal<Categorie[]>([]);
+  chargement = signal<boolean>(true);
+
+  ngOnInit(): void {
+    this.categorieService.getCategoriesParentes().subscribe({
+      next: (res) => {
+        this.categories.set(res.data);
+        this.chargement.set(false);
+      },
+      error: () => this.chargement.set(false),
+    });
+  }
+
+  icone(slug: string): string {
+    return icone(slug);
+  }
 
   selecter(label: string): void {
     this.active.set(label);
