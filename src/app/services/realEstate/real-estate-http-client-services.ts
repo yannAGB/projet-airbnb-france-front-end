@@ -36,6 +36,7 @@ export interface RealEstate {
   id: number;
   title: string;
   description: string;
+  is_coup_de_coeur: boolean;
   slug: string;
   price: number;
   promotion: string;

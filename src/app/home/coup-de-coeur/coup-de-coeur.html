@@ -12,12 +12,22 @@
       </div>
     </div>
 
-    <div class="carousel-track" #track>
-      @for (p of properties; track p.id) {
-        <div class="carousel-item-wrap">
-          <app-property-card [property]="p" />
-        </div>
-      }
-    </div>
+    @if (chargement()) {
+      <div class="carousel-track">
+        @for (n of [1, 2, 3, 4, 5, 6]; track n) {
+          <div class="carousel-item-wrap">
+            <div class="card-skeleton"></div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="carousel-track" #track>
+        @for (p of properties; track p.id) {
+          <div class="carousel-item-wrap">
+            <app-property-card [property]="p" />
+          </div>
+        }
+      </div>
+    }
   </div>
 </section>

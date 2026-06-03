@@ -2,12 +2,22 @@
   <div class="container-xxl px-4 px-lg-5">
     <h2 class="section-title mb-4">Découvrez nos destinations populaires</h2>
 
-    <div class="row g-4">
-      @for (p of properties; track p.id) {
-        <div class="col-sm-6 col-lg-3">
-          <app-property-card [property]="p" />
-        </div>
-      }
-    </div>
+    @if (chargement()) {
+      <div class="row g-4">
+        @for (n of [1, 2, 3, 4, 5]; track n) {
+          <div class="col-sm-6 col-lg-3">
+            <div class="card-skeleton"></div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="row g-4">
+        @for (p of properties; track p.id) {
+          <div class="col-sm-6 col-lg-3">
+            <app-property-card [property]="p" />
+          </div>
+        }
+      </div>
+    }
   </div>
 </section>
