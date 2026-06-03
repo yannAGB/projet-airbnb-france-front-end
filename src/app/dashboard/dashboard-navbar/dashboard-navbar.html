@@ -1,29 +1,23 @@
 <nav class="dash-nav">
   <div class="dash-nav-inner">
-    <!-- Logo -->
     <a routerLink="/" class="logo"> TrouvezMoi<span class="logo-dot">.com</span> </a>
 
-    <!-- Liens centre -->
     <ul class="nav-links">
       <li>
         <a href="#" class="nav-link">
           <i class="bi bi-chat-dots"></i>
           Messages
-          <span class="notif-badge">3</span>
+          @if (nbNotifications() > 0) {
+            <span class="notif-badge">{{ nbNotifications() }}</span>
+          }
         </a>
       </li>
-
       <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-calendar3"></i>
-          Calendrier
-        </a>
+        <a href="#" class="nav-link"> <i class="bi bi-calendar3"></i> Calendrier </a>
       </li>
-
       <li class="dropdown">
         <a href="#" class="nav-link" data-bs-toggle="dropdown">
-          <i class="bi bi-bookmark"></i>
-          Réservations
+          <i class="bi bi-bookmark"></i> Réservations
           <i class="bi bi-chevron-down chev"></i>
         </a>
         <ul class="dropdown-menu shadow-sm border-0">
@@ -32,11 +26,9 @@
           <li><a class="dropdown-item" href="#">Annulées</a></li>
         </ul>
       </li>
-
       <li class="dropdown">
         <a href="#" class="nav-link" data-bs-toggle="dropdown">
-          <i class="bi bi-megaphone"></i>
-          Mes annonces
+          <i class="bi bi-megaphone"></i> Mes annonces
           <i class="bi bi-chevron-down chev"></i>
         </a>
         <ul class="dropdown-menu shadow-sm border-0">
@@ -47,17 +39,28 @@
       </li>
     </ul>
 
-    <!-- Actions droite -->
     <div class="nav-right">
       <button class="icon-btn" title="Notifications">
         <i class="bi bi-bell"></i>
-        <span class="red-dot"></span>
+        @if (nbNotifications() > 0) {
+          <span class="red-dot"></span>
+        }
       </button>
       <button class="icon-btn" title="Paramètres">
         <i class="bi bi-gear"></i>
       </button>
-      <div class="avatar av-orange">M</div>
-      <div class="avatar av-white">A</div>
+
+      <!-- Initiales dynamiques depuis /api/me -->
+      @if (utilisateur()) {
+        <div class="avatar av-orange">
+          {{ utilisateur()?.firstName?.charAt(0) | uppercase }}
+        </div>
+        <div class="avatar av-white">
+          {{ utilisateur()?.lastName?.charAt(0) | uppercase }}
+        </div>
+      } @else {
+        <div class="avatar av-orange">?</div>
+      }
     </div>
   </div>
 </nav>
