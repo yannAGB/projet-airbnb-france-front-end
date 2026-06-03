@@ -1,10 +1,20 @@
 <div class="section-card">
   <h5 class="section-title">Réservations à venir</h5>
-  <div class="gallery">
-    @for (img of images; track img; let i = $index) {
-      <div class="gallery-item" [class.gallery-main]="i === 0">
-        <img [src]="img" [alt]="'Logement ' + (i + 1)" loading="lazy" />
-      </div>
-    }
-  </div>
+
+  @if (chargement()) {
+    <div class="gallery-skeleton"></div>
+  } @else if (images.length === 0) {
+    <div class="empty-state">
+      <i class="bi bi-calendar-x"></i>
+      <p>Aucune réservation à venir</p>
+    </div>
+  } @else {
+    <div class="gallery">
+      @for (img of images; track img; let i = $index) {
+        <div class="gallery-item" [class.gallery-main]="i === 0">
+          <img [src]="img" [alt]="'Logement ' + (i + 1)" loading="lazy" />
+        </div>
+      }
+    </div>
+  }
 </div>

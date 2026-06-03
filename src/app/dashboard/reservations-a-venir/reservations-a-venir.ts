@@ -1,14 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import {
+  BookingHttpClientServices,
+  Booking,
+} from '../../services/booking/booking-http-client-services';
 
 @Component({
   selector: 'app-reservations-a-venir',
   templateUrl: './reservations-a-venir.html',
   styleUrl: './reservations-a-venir.css',
 })
-export class ReservationsAVenirComponent {
-  readonly images: string[] = [
-    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600',
-    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600',
-    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600',
-  ];
+export class ReservationsAVenirComponent implements OnInit {
+  private bookingService = new BookingHttpClientServices();
+
+  bookings = signal<Booking[]>([]);
+  chargement = signal<boolean>(true);
+
+  get images(): string[] {
+    return this.bookings()
+      .filter((b) => b.logement.image)
+      .slice(0, 3)
+      .map((b) => b.logement.image!);
+  }
+
+  ngOnInit(): void {
+    this.bookingService.getUpcoming(5).subscribe({
+      next: (res) => {
+        this.bookings.set(res.data ?? []);
+        this.chargement.set(false);
+      },
+      error: () => this.chargement.set(false),
+    });
+  }
 }
