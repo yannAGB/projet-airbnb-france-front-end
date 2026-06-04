@@ -6,7 +6,6 @@ import {
   BookingStatut,
 } from '../../services/booking/booking-http-client-services';
 
-/* Adapter le type Reservation pour le card existant */
 import { Reservation } from '../reservation-card/reservation-card';
 
 @Component({
