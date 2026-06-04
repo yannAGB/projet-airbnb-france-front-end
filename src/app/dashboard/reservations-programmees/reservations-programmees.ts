@@ -1,5 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { ReservationCardComponent, Reservation } from '../reservation-card/reservation-card';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ReservationCardComponent } from '../reservation-card/reservation-card';
+import {
+  BookingHttpClientServices,
+  Booking,
+  BookingStatut,
+} from '../../services/booking/booking-http-client-services';
+
+/* Adapter le type Reservation pour le card existant */
+import { Reservation } from '../reservation-card/reservation-card';
 
 @Component({
   selector: 'app-reservations-programmees',
@@ -7,64 +15,54 @@ import { ReservationCardComponent, Reservation } from '../reservation-card/reser
   templateUrl: './reservations-programmees.html',
   styleUrl: './reservations-programmees.css',
 })
-export class ReservationsProgrammeesComponent {
-  reservations = signal<Reservation[]>([
-    {
-      id: 1,
-      avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-      nom: 'Thomas Lefèvre',
-      logement: 'Villa de Farenne',
-      dates: '1 Nov 2026 - 2 nuits',
-      nuits: 2,
-      voyageurs: 4,
-      montant: 880,
-      statut: 'en_attente',
-    },
-    {
-      id: 2,
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-      nom: 'Emma Dubois',
-      logement: 'Studio Farenne',
-      dates: '16 Oct 2026 - 3 nuits',
-      nuits: 3,
-      voyageurs: 2,
-      montant: 670,
-      statut: 'confirme',
-    },
-    {
-      id: 3,
-      avatar: 'https://randomuser.me/api/portraits/men/55.jpg',
-      nom: 'Julien Martin',
-      logement: 'Mas des Oliviers',
-      dates: '17 Juil 2026 - 5 nuits',
-      nuits: 5,
-      voyageurs: 3,
-      montant: 1200,
-      statut: 'en_attente',
-      note: 'Bonjour, est-ce que vous avez une table de ping-pong ?',
-    },
-    {
-      id: 4,
-      avatar: 'https://randomuser.me/api/portraits/women/62.jpg',
-      nom: 'Clara Fournier',
-      logement: 'Villa de Farenne',
-      dates: '30 Mar 2026 - 1 nuit',
-      nuits: 1,
-      voyageurs: 2,
-      montant: 1360,
-      statut: 'a_confirmer',
-    },
-  ]);
+export class ReservationsProgrammeesComponent implements OnInit {
+  private bookingService = inject(BookingHttpClientServices);
+
+  chargement = signal<boolean>(true);
+  reservations = signal<Reservation[]>([]);
+
+  ngOnInit(): void {
+    this.bookingService.getBookings().subscribe({
+      next: (res) => {
+        this.reservations.set((res.data ?? []).map((b) => this.versReservation(b)));
+        this.chargement.set(false);
+      },
+      error: () => this.chargement.set(false),
+    });
+  }
+
+  private versReservation(b: Booking): Reservation {
+    return {
+      id: b.id,
+      avatar: `https://ui-avatars.com/api/?name=${b.guest.firstName}+${b.guest.lastName}&background=FF5A1F&color=fff&size=44`,
+      nom: `${b.guest.firstName} ${b.guest.lastName}`,
+      logement: b.logement.title,
+      dates: `${b.dateArrivee} — ${b.nbNuits} nuit${b.nbNuits > 1 ? 's' : ''}`,
+      nuits: b.nbNuits,
+      voyageurs: b.nbVoyageurs,
+      montant: b.montant,
+      statut: b.statut as Reservation['statut'],
+      note: b.note ?? undefined,
+    };
+  }
 
   accepterReservation(id: number): void {
-    this.reservations.update((list) =>
-      list.map((r) => (r.id === id ? { ...r, statut: 'confirme' as const } : r)),
-    );
+    this.bookingService.updateStatut(id, 'confirme').subscribe({
+      next: () => {
+        this.reservations.update((list) =>
+          list.map((r) => (r.id === id ? { ...r, statut: 'confirme' as const } : r)),
+        );
+      },
+    });
   }
 
   refuserReservation(id: number): void {
-    this.reservations.update((list) =>
-      list.map((r) => (r.id === id ? { ...r, statut: 'annule' as const } : r)),
-    );
+    this.bookingService.updateStatut(id, 'annule').subscribe({
+      next: () => {
+        this.reservations.update((list) =>
+          list.map((r) => (r.id === id ? { ...r, statut: 'annule' as const } : r)),
+        );
+      },
+    });
   }
 }
