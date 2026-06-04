@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  BookingHttpClientServices,
+  Booking,
+} from '../../services/booking/booking-http-client-services';
 
 interface Tache {
   id: number;
@@ -7,35 +11,50 @@ interface Tache {
   date: string;
 }
 
-interface TacheFaite {
-  id: number;
-  texte: string;
-}
-
 @Component({
   selector: 'app-pense-bete',
   templateUrl: './pense-bete.html',
   styleUrl: './pense-bete.css',
 })
-export class PenseBeteComponent {
-  readonly taches: Tache[] = [
-    {
-      id: 1,
-      texte: 'Nettoyage prévu à la villa de Farenne',
-      sousTitre: 'Farenne — 5 mai — 11h30',
-      date: 'Vendredi 3 Mai — 11:30',
-    },
-    {
-      id: 2,
-      texte: 'Nouvelle arrivée prévue au Mas des Oliviers',
-      sousTitre: 'Dimanche 12 Mai — 10:00',
-      date: 'Dimanche 12 Mai — 10:00',
-    },
-  ];
+export class PenseBeteComponent implements OnInit {
+  private bookingService = inject(BookingHttpClientServices);
 
-  readonly tachesFaites: TacheFaite[] = [
-    { id: 1, texte: 'Clés prêtées à la villa de Farenne' },
-    { id: 2, texte: 'Vendredi 10 Mai — 11h00' },
-    { id: 3, texte: 'Nouvelle arrivée prévue au Mas des Oliviers' },
-  ];
+  taches = signal<Tache[]>([]);
+  tachesAFaire = signal<Tache[]>([]);
+  chargement = signal<boolean>(true);
+
+  ngOnInit(): void {
+    this.bookingService.getUpcoming(6).subscribe({
+      next: (res) => {
+        const bookings = res.data ?? [];
+
+        /* Tâches à faire = arrivées prochaines */
+        const aFaire: Tache[] = bookings
+          .filter((b) => b.statut === 'confirme' || b.statut === 'en_attente')
+          .slice(0, 2)
+          .map((b) => ({
+            id: b.id,
+            texte: `Arrivée prévu : ${b.logement.title}`,
+            sousTitre: `${b.guest.firstName} ${b.guest.lastName} — ${b.nbVoyageurs} voyageur${b.nbVoyageurs > 1 ? 's' : ''}`,
+            date: b.dateArrivee,
+          }));
+
+        /* Tâches terminées = réservations récentes confirmées */
+        const faites: Tache[] = bookings
+          .filter((b) => b.statut === 'confirme')
+          .slice(0, 3)
+          .map((b) => ({
+            id: b.id * 100,
+            texte: `Réservation confirmée — ${b.logement.title}`,
+            sousTitre: b.dateArrivee,
+            date: b.dateArrivee,
+          }));
+
+        this.tachesAFaire.set(aFaire);
+        this.taches.set(faites);
+        this.chargement.set(false);
+      },
+      error: () => this.chargement.set(false),
+    });
+  }
 }
