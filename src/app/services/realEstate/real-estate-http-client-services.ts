@@ -51,6 +51,11 @@ export interface RealEstate {
   is_online: boolean;
   created_at: string;
   updated_at: string;
+  amenities: string[];
+  note_moyenne: number;
+  nb_avis: number;
+  hote: PropertyHote | null;
+  reviews: PropertyReview[];
 }
 
 export interface RealEstateApiResponse {
@@ -62,6 +67,40 @@ export interface RealEstateApiResponse {
 export interface RealEstateSingleResponse {
   success: boolean;
   data: RealEstate;
+}
+
+export interface PropertyHote {
+  id: number;
+  firstName: string;
+  lastName: string;
+  initiales: string;
+  created_at: string;
+}
+
+export interface PropertyReview {
+  id: number;
+  note: number;
+  comment: string | null;
+  created_at: string;
+  reviewer: { firstName: string; lastName: string; initiales: string };
+}
+
+export interface PropertyReviewsResponse {
+  success: boolean;
+  note_moyenne: number;
+  nb_avis: number;
+  data: PropertyReview[];
+}
+
+export interface PropertyAvailability {
+  dateArrivee: string;
+  dateDepart: string;
+  statut: string;
+}
+
+export interface PropertyAvailabilityResponse {
+  success: boolean;
+  data: PropertyAvailability[];
 }
 
 @Injectable({
@@ -109,6 +148,22 @@ export class RealEstateHttpClientServices {
   getDestinations(limit = 5): Observable<RealEstateApiResponse> {
     return this.http.get<RealEstateApiResponse>(
       `${this.apiUrl}/api/real-estates/destinations?limit=${limit}`,
+    );
+  }
+
+  getPropertyDetail(slug: string): Observable<RealEstateSingleResponse> {
+    return this.http.get<RealEstateSingleResponse>(`${this.apiUrl}/api/real-estates/slug/${slug}`);
+  }
+
+  getPropertyReviews(slug: string): Observable<PropertyReviewsResponse> {
+    return this.http.get<PropertyReviewsResponse>(
+      `${this.apiUrl}/api/real-estates/slug/${slug}/reviews`,
+    );
+  }
+
+  getPropertyAvailability(slug: string): Observable<PropertyAvailabilityResponse> {
+    return this.http.get<PropertyAvailabilityResponse>(
+      `${this.apiUrl}/api/real-estates/slug/${slug}/availability`,
     );
   }
 }
