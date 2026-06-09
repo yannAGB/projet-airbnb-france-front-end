@@ -1,1 +1,96 @@
-<p>property-tabs works!</p>
+<div class="tabs-section">
+  <!-- Navigation onglets -->
+  <div class="tabs-nav">
+    @for (tab of tabs; track tab.id) {
+      <button
+        type="button"
+        class="tab-btn"
+        [class.tab-active]="ongletActif() === tab.id"
+        (click)="selectionner(tab.id)"
+      >
+        {{ tab.label }}
+        @if (tab.id === 'avis' && nbAvis() > 0) {
+          ({{ nbAvis() }})
+        }
+      </button>
+    }
+  </div>
+
+  <!-- Contenu -->
+  <div class="tab-content">
+    @if (ongletActif() === 'description') {
+      <div class="tab-description">
+        <p>{{ logement.description }}</p>
+      </div>
+    }
+
+    @if (ongletActif() === 'disponibilites') {
+      <div class="tab-calendar">
+        <p class="calendar-legend-title">Légende :</p>
+        <div class="calendar-legend">
+          <span class="legend-item"> <span class="dot dot-confirme"></span> Confirmé </span>
+          <span class="legend-item"> <span class="dot dot-attente"></span> En attente </span>
+          <span class="legend-item"> <span class="dot dot-libre"></span> Disponible </span>
+        </div>
+        @if (disponibilites().length === 0) {
+          <p class="text-muted">Aucune réservation à venir — logement disponible !</p>
+        } @else {
+          <div class="dates-list">
+            @for (d of disponibilites(); track d.dateArrivee) {
+              <div class="date-reserved">
+                <i
+                  class="bi bi-calendar-x-fill"
+                  [style.color]="d.statut === 'confirme' ? '#E65100' : '#F57F17'"
+                ></i>
+                <span>{{ d.dateArrivee }} → {{ d.dateDepart }}</span>
+                <span class="date-statut" [class]="'st-' + d.statut">{{ d.statut }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    @if (ongletActif() === 'avis') {
+      <div class="tab-avis">
+        @if (reviews().length === 0) {
+          <p class="text-muted">Aucun avis pour ce logement</p>
+        }
+        @for (review of reviews(); track review.id) {
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-avatar">{{ review.reviewer.initiales }}</div>
+              <div>
+                <p class="review-nom">
+                  {{ review.reviewer.firstName }} {{ review.reviewer.lastName }}
+                </p>
+                <div class="review-stars">
+                  @for (s of [1, 2, 3, 4, 5]; track s) {
+                    <i
+                      class="bi bi-star-fill"
+                      [style.color]="s <= review.note ? 'var(--orange)' : '#DDD'"
+                      style="font-size: 12px"
+                    ></i>
+                  }
+                </div>
+              </div>
+              <span class="review-date">{{ review.created_at }}</span>
+            </div>
+            @if (review.comment) {
+              <p class="review-text">{{ review.comment }}</p>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    @if (ongletActif() === 'localisation') {
+      <div class="tab-map">
+        <div
+          id="map-detail"
+          style="height: 350px; border-radius: var(--radius-lg); overflow: hidden"
+        ></div>
+      </div>
+    }
+  </div>
+</div>
