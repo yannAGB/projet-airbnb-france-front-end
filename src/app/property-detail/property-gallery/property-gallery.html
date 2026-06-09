@@ -1,1 +1,25 @@
-<p>property-gallery works!</p>
+<div class="gallery-wrapper">
+  <div class="gallery-grid">
+    <!-- Image principale -->
+    <div class="gallery-main">
+      <img [src]="mainImage" alt="Photo principale du logement" />
+      <button class="btn-toutes-photos" type="button">
+        <i class="bi bi-grid-3x3-gap"></i>
+        Toutes les photos
+      </button>
+    </div>
+
+    <!-- Miniatures -->
+    <div class="gallery-thumbs">
+      @for (img of thumbnails; track img; let i = $index) {
+        <div
+          class="gallery-thumb"
+          [class.active]="imageActive() === i + 1"
+          (click)="selectionner(i + 1)"
+        >
+          <img [src]="img" [alt]="'Photo ' + (i + 2)" loading="lazy" />
+        </div>
+      }
+    </div>
+  </div>
+</div>

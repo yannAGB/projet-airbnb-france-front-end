@@ -1,0 +1,63 @@
+.detail-page {
+  background: #fff;
+}
+
+.property-header {
+  padding: 8px 0 16px;
+}
+
+.property-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.property-location {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.property-location i {
+  color: var(--orange);
+  margin-right: 4px;
+}
+
+.property-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.text-orange {
+  color: var(--orange) !important;
+}
+
+.badge-promo {
+  background: var(--orange);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.divider {
+  border-color: #f0f0f0;
+  margin: 24px 0;
+}
+
+.sticky-card {
+  position: sticky;
+  top: 76px;
+}
