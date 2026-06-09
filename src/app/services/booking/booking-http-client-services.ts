@@ -44,6 +44,13 @@ export interface BookingSingleResponse {
   success: boolean;
   data: Booking;
 }
+export interface CreateBookingPayload {
+  realEstateId: number;
+  dateArrivee: string;
+  dateDepart: string;
+  nbVoyageurs: number;
+  note?: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class BookingHttpClientServices {
@@ -62,5 +69,9 @@ export class BookingHttpClientServices {
     return this.http.patch<BookingSingleResponse>(`${this.apiUrl}/api/bookings/${id}/statut`, {
       statut,
     });
+  }
+
+  createBooking(payload: CreateBookingPayload): Observable<BookingSingleResponse> {
+    return this.http.post<BookingSingleResponse>(`${this.apiUrl}/api/bookings/create`, payload);
   }
 }
