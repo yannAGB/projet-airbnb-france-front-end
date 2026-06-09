@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './property-tabs.html',
   styleUrl: './property-tabs.css',
 })
-export class PropertyTabs {}
+export class PropertyTabsComponent {}

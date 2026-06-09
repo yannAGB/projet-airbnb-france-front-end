@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './property-gallery.html',
   styleUrl: './property-gallery.css',
 })
-export class PropertyGallery {}
+export class PropertyGalleryComponent {}

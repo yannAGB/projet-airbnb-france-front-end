@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './property-amenities.html',
   styleUrl: './property-amenities.css',
 })
-export class PropertyAmenities {}
+export class PropertyAmenitiesComponent {}

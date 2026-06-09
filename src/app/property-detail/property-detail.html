@@ -1,1 +1,76 @@
-<p>property-detail works!</p>
+<app-navbar />
+
+<main class="detail-page">
+  @if (chargement()) {
+    <div class="d-flex justify-content-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+    </div>
+  }
+
+  @if (erreur() && !chargement()) {
+    <div class="container py-5">
+      <div class="alert alert-warning">{{ erreur() }}</div>
+    </div>
+  }
+
+  @if (logement() && !chargement()) {
+    <!-- Galerie photos -->
+    <app-property-gallery [images]="logement()!.images" />
+
+    <!-- Contenu principal -->
+    <div class="container-xxl px-4 px-lg-5 py-4">
+      <div class="row g-5">
+        <!-- Colonne gauche -->
+        <div class="col-lg-8">
+          <!-- En-tête -->
+          <div class="property-header">
+            <h1 class="property-title">{{ logement()!.title }}</h1>
+            <p class="property-location">
+              <i class="bi bi-geo-alt-fill"></i>
+              {{ logement()!.adresse.ville }}, {{ logement()!.adresse.pays }}
+            </p>
+            <div class="property-meta">
+              <span class="meta-item">
+                <i class="bi bi-people-fill"></i>
+                {{ logement()!.capacite.maxTravelers }} voyageurs
+              </span>
+              <span class="meta-item">
+                <i class="bi bi-star-fill text-orange"></i>
+                {{ logement()!.note_moyenne }} ({{ logement()!.nb_avis }} avis)
+              </span>
+              @if (logement()!.promotion) {
+                <span class="badge-promo">{{ logement()!.promotion }}</span>
+              }
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <!-- Profil hôte -->
+          <app-property-host [hote]="logement()!.hote" />
+
+          <hr class="divider" />
+
+          <!-- Équipements -->
+          <app-property-amenities [amenities]="logement()!.amenities" />
+
+          <hr class="divider" />
+
+          <!-- Onglets -->
+          <app-property-tabs [logement]="logement()!" />
+        </div>
+
+        <!-- Colonne droite — carte de réservation -->
+        <div class="col-lg-4">
+          <div class="sticky-card">
+            <app-property-booking-card [logement]="logement()!" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</main>
+
+<app-footer />
