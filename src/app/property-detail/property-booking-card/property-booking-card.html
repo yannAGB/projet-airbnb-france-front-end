@@ -30,8 +30,8 @@
           class="date-input"
           [value]="dateArrivee()"
           (input)="dateArrivee.set($any($event.target).value)"
-          [min]="today"
         />
+        <!-- [min]="today" -->
       </div>
       <div class="date-divider"></div>
       <div class="date-field">
@@ -41,8 +41,9 @@
           class="date-input"
           [value]="dateDepart()"
           (input)="dateDepart.set($any($event.target).value)"
-          [min]="dateArrivee() || today"
+          [min]="dateArrivee()"
         />
+        <!-- || today -->
       </div>
     </div>
 

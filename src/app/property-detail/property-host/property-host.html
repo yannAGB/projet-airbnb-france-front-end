@@ -1,1 +1,15 @@
-<p>property-host works!</p>
+@if (hote) {
+  <div class="host-section">
+    <div class="host-avatar">{{ hote.initiales }}</div>
+    <div class="host-info">
+      <h4 class="host-name">{{ hote.firstName }} {{ hote.lastName }}</h4>
+      <p class="host-since">Hôte depuis {{ hote.created_at }}</p>
+      <div class="host-badges">
+        <span class="host-badge">
+          <i class="bi bi-patch-check-fill"></i>
+          Hôte vérifié
+        </span>
+      </div>
+    </div>
+  </div>
+}
