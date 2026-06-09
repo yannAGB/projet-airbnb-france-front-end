@@ -1,1 +1,100 @@
-<p>property-booking-card works!</p>
+<div class="booking-card">
+  <!-- Prix -->
+  <div class="booking-price">
+    <span class="price-main">{{ logement.price }}€</span>
+    <span class="price-unit">/ nuit</span>
+    @if (logement.promotion) {
+      <span class="price-promo">{{ logement.promotion }}</span>
+    }
+  </div>
+
+  <!-- Note -->
+  <div class="booking-rating">
+    <i class="bi bi-star-fill" style="color: var(--orange); font-size: 13px"></i>
+    <strong>{{ logement.note_moyenne }}</strong>
+    <span>({{ logement.nb_avis }} avis)</span>
+  </div>
+
+  @if (succes()) {
+    <div class="alert alert-success">
+      <i class="bi bi-check-circle-fill me-2"></i>
+      Réservation envoyée ! L'hôte va vous confirmer.
+    </div>
+  } @else {
+    <!-- Dates -->
+    <div class="booking-dates">
+      <div class="date-field">
+        <label class="date-label">Arrivée</label>
+        <input
+          type="date"
+          class="date-input"
+          [value]="dateArrivee()"
+          (input)="dateArrivee.set($any($event.target).value)"
+          [min]="today"
+        />
+      </div>
+      <div class="date-divider"></div>
+      <div class="date-field">
+        <label class="date-label">Départ</label>
+        <input
+          type="date"
+          class="date-input"
+          [value]="dateDepart()"
+          (input)="dateDepart.set($any($event.target).value)"
+          [min]="dateArrivee() || today"
+        />
+      </div>
+    </div>
+
+    <!-- Voyageurs -->
+    <div class="booking-voyageurs">
+      <span class="voyageurs-label">Voyageurs</span>
+      <div class="voyageurs-counter">
+        <button type="button" (click)="decrement()">−</button>
+        <span>{{ nbVoyageurs() }}</span>
+        <button type="button" (click)="increment()">+</button>
+      </div>
+    </div>
+
+    <!-- Total -->
+    @if (nbNuits > 0) {
+      <div class="booking-total">
+        <div class="total-row">
+          <span>{{ logement.price }}€ × {{ nbNuits }} nuit{{ nbNuits > 1 ? 's' : '' }}</span>
+          <span>{{ total }}€</span>
+        </div>
+        <div class="total-final">
+          <strong>Total</strong>
+          <strong>{{ total }}€</strong>
+        </div>
+      </div>
+    }
+
+    <!-- Erreur -->
+    @if (erreur()) {
+      <div class="alert alert-danger small py-2">{{ erreur() }}</div>
+    }
+
+    <!-- Bouton -->
+    @if (estConnecte) {
+      <button
+        class="btn-reserver"
+        type="button"
+        [disabled]="chargement() || nbNuits < 1"
+        (click)="reserver()"
+      >
+        @if (chargement()) {
+          <span class="spinner-border spinner-border-sm me-2"></span>
+        }
+        Réserver maintenant
+      </button>
+    } @else {
+      <a routerLink="/login" class="btn-reserver text-center"> Connectez-vous pour réserver </a>
+    }
+
+    <p class="booking-info">
+      <i class="bi bi-shield-check"></i>
+      Vous ne serez pas débité pour l'instant
+    </p>
+  }
+</div>
