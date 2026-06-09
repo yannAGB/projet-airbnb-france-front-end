@@ -1,1 +1,11 @@
-<p>property-amenities works!</p>
+<div class="amenities-section">
+  <h5 class="amenities-title">Ce que propose ce logement</h5>
+  <div class="amenities-grid">
+    @for (a of amenities; track a) {
+      <div class="amenite-item">
+        <i class="bi {{ icone(a) }} amenite-icon"></i>
+        <span class="amenite-label">{{ a }}</span>
+      </div>
+    }
+  </div>
+</div>

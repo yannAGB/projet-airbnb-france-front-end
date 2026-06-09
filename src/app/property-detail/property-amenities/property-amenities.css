@@ -1,0 +1,31 @@
+.amenities-section {
+  padding: 4px 0;
+}
+
+.amenities-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.amenite-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+.amenite-icon {
+  font-size: 18px;
+  color: var(--navy);
+  width: 24px;
+  flex-shrink: 0;
+}
