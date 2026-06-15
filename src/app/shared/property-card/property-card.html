@@ -1,9 +1,16 @@
-<div class="card" [class.compact]="compact">
+<a [routerLink]="['/logements', property.slug]" class="card" [class.compact]="compact">
   <div class="card-img-wrap">
     <img [src]="property.image" [alt]="property.title" loading="lazy" />
+
     <span class="badge-type">{{ property.type }}</span>
     <span class="badge-price">{{ property.price }}€ / nuit</span>
-    <button class="btn-fav" [class.active]="property.isFavorite" (click)="toggleFavorite($event)">
+
+    <button
+      class="btn-fav"
+      [class.active]="property.isFavorite"
+      (click)="toggleFavorite($event)"
+      type="button"
+    >
       <i
         class="bi"
         [class.bi-heart-fill]="property.isFavorite"
@@ -14,6 +21,7 @@
 
   <div class="card-info">
     <h6 class="card-name">{{ property.title }}</h6>
+
     <div class="card-stars">
       @for (s of stars; track s) {
         <i
@@ -22,8 +30,10 @@
           style="font-size: 11px"
         ></i>
       }
-      <span class="review-n">({{ property.reviewCount }})</span>
+
+      <span class="review-n"> ({{ property.reviewCount }}) </span>
     </div>
+
     <p class="card-desc">{{ property.description }}</p>
   </div>
-</div>
+</a>

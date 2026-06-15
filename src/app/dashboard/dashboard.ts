@@ -16,7 +16,6 @@ import { FooterComponent } from '../shared/footer/footer';
 @Component({
   selector: 'app-dashboard',
   imports: [
-    RouterLink,
     DashboardNavbarComponent,
     SidebarComponent,
     ReservationsAVenirComponent,

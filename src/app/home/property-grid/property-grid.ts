@@ -41,6 +41,7 @@ export class PropertyGridComponent implements OnInit {
   private versPropertyCard(logement: RealEstate): PropertyCard {
     return {
       id: logement.id,
+      slug: logement.slug,
       image: logement.image ?? 'https://picsum.photos/400/300?random=' + logement.id,
       price: logement.price,
       type: logement.type ?? logement.categorie?.title ?? 'Logement',

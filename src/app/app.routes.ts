@@ -20,6 +20,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./dashboard/dashboard').then((m) => m.DashboardComponent),
   },
+
+  {
+    path: 'logements/:slug',
+    loadComponent: () =>
+      import('./property-detail/property-detail').then((m) => m.PropertyDetailComponent),
+  },
   /*   {
     path: '',
     redirectTo: 'home',

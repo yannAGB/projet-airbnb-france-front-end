@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 export interface PropertyCard {
   id: number;
@@ -7,6 +8,7 @@ export interface PropertyCard {
   type: string;
   title: string;
   rating: number;
+  slug: string;
   reviewCount: number;
   description: string;
   isFavorite?: boolean;
@@ -14,6 +16,7 @@ export interface PropertyCard {
 
 @Component({
   selector: 'app-property-card',
+  imports: [RouterLink],
   templateUrl: './property-card.html',
   styleUrl: './property-card.css',
 })

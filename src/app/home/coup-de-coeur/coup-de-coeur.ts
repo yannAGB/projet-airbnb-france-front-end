@@ -22,6 +22,7 @@ export class CoupDeCoeurComponent implements OnInit {
   get properties(): PropertyCard[] {
     return this.logements().map((l) => ({
       id: l.id,
+      slug: l.slug,
       image: l.image ?? `https://picsum.photos/400/300?random=${l.id}`,
       price: l.price,
       type: l.type ?? l.categorie?.title ?? 'Logement',

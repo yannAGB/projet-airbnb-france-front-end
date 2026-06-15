@@ -8,6 +8,9 @@
     box-shadow 0.25s,
     transform 0.25s;
   cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
